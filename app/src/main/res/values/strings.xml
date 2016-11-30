@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ImageIn</string>
+    <string name="tv_splash">ImageIn</string>
 </resources>

@@ -2,9 +2,11 @@ package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import org.esiea.rouxel_ulhassanshah.imagein.R;
 import org.esiea.rouxel_ulhassanshah.imagein.adapter.GalleryAdapter;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
-        rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rv.setLayoutManager(new GridLayoutManager(this, 2));
 
         InputStream is = getResources().openRawResource(R.raw.images);
         Writer writer = new StringWriter();
@@ -61,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
             rv.setAdapter(gAdapter);
 
         } catch(JSONException e) {
-
-            Log.i("err", e.getMessage());
             e.printStackTrace();
         }
     }

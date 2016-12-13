@@ -2,6 +2,8 @@ package org.esiea.rouxel_ulhassanshah.imagein.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +40,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
     @Override
     public void onBindViewHolder(ImageHolder holder, int position) {
         try {
-            String url = (String) this.gallery.getJSONObject(position).getString("url");
-            holder.bind(url);
+            String url = this.gallery.getJSONObject(position).getString("url");
+            holder.bind(url, position);
         } catch(JSONException e) {
             e.printStackTrace();
         }
@@ -50,9 +52,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
         return this.gallery.length();
     }
 
+
     public class ImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView iv;
+        public int position;
 
         public ImageHolder(View view) {
             super(view);
@@ -64,11 +68,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
         public void onClick(View view) {
             Context context = view.getContext();
             Intent showImageIntent = new Intent(context, ImageActivity.class);
-            //showImageIntent.putExtra(image);
+
+            Bundle extras = new Bundle();
+            extras.putInt("imagePosition", this.position);
+
+            showImageIntent.putExtras(extras);
             context.startActivity(showImageIntent);
         }
 
-        public void bind(String url) {
+        public void bind(String url, int position) {
+            this.position = position;
             Glide.with(this.iv.getContext())
                     .load(url)
                     .into(this.iv);

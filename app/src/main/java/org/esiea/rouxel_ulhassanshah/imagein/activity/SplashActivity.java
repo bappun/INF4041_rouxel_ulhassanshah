@@ -1,8 +1,10 @@
-package org.esiea.rouxel_ulhassanshah.imagein;
+package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import org.esiea.rouxel_ulhassanshah.imagein.R;
 
 public class SplashActivity extends AppCompatActivity {
 

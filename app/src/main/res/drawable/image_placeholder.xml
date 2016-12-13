@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@color/colorSplashBackground"/>
+        android:drawable="@color/colorImagePlaceholder"/>
 
 </layer-list>

@@ -1,14 +1,10 @@
 package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
+import android.webkit.WebView;
 
 import org.esiea.rouxel_ulhassanshah.imagein.R;
-import org.esiea.rouxel_ulhassanshah.imagein.adapter.GalleryAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,10 +56,17 @@ public class ImageActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             int imagePosition = extras.getInt("imagePosition");
 
-            ImageView iv = (ImageView) findViewById(R.id.image_fullscreen);
-            Glide.with(iv.getContext())
-                    .load(jArray.getJSONObject(imagePosition).getString("url"))
-                    .into(iv);
+            WebView wv = (WebView) findViewById(R.id.image_fullscreen_webview);
+
+            final String mimeType = "text/html";
+            final String encoding = "UTF-8";
+            String html = "<style>body { margin: 0; background: black url(" +
+                    jArray.getJSONObject(imagePosition).getString("url") +
+                    ") no-repeat center center; }</style>";
+
+            wv.getSettings().setBuiltInZoomControls(true);
+            wv.getSettings().setDisplayZoomControls(false);
+            wv.loadDataWithBaseURL("", html, mimeType, encoding, "");
 
         } catch(JSONException e) {
             e.printStackTrace();

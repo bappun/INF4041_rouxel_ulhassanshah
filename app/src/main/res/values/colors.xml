@@ -13,8 +13,5 @@
 
     <color name="colorSplashBackground">#000000</color>
 
-    <color name="colorImagePlaceholder">#333333</color>
-    <color name="colorImageNotFound">#ef5350</color>
-
     <color name="activity_main_bg">#000</color>
 </resources>

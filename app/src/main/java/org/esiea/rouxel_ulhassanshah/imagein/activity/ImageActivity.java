@@ -6,18 +6,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import org.esiea.rouxel_ulhassanshah.imagein.R;
 import org.json.JSONArray;
@@ -41,6 +46,8 @@ public class ImageActivity extends AppCompatActivity {
     private FloatingActionButton share;
     private FloatingActionButton download;
     private String imageURL;
+
+    private final int WRITE_PERM = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,13 +114,13 @@ public class ImageActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                            new ImageDownloadAsyncTask().execute();
-                        } else {
-                            ActivityCompat.requestPermissions(ImageActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                new ImageDownloadAsyncTask().execute();
-                            }
+                        if (ContextCompat.checkSelfPermission(ImageActivity.this,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
+
+                                ActivityCompat.requestPermissions(ImageActivity.this,
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        WRITE_PERM);
                         }
                     } else {
                         new ImageDownloadAsyncTask().execute();
@@ -141,12 +148,11 @@ public class ImageActivity extends AppCompatActivity {
                             break;
                         case MotionEvent.ACTION_UP:
                             if (!mMoveOccurred) {
-                                if(visible) {
+                                if (visible) {
                                     share.hide();
                                     download.hide();
                                     visible = false;
-                                }
-                                else {
+                                } else {
                                     share.show();
                                     download.show();
                                     visible = true;
@@ -165,6 +171,25 @@ public class ImageActivity extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+
+            case WRITE_PERM: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.i("OK", Integer.toString(requestCode));
+                    new ImageDownloadAsyncTask().execute();
+                } else {
+                    Log.i("else", Integer.toString(requestCode));
+                    Toast.makeText(ImageActivity.this, R.string.write_perm_denied_msg, Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+            }
         }
     }
 
@@ -193,7 +218,7 @@ public class ImageActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
 
                 String root = Environment.getExternalStorageDirectory().toString();
-                File dir = new File(root + "/ImageIn");
+                File dir = new File(root + "/Pictures/ImageIn");
 
                 if (!dir.exists()) {
                     dir.mkdirs();

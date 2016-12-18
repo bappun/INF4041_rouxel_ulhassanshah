@@ -1,10 +1,10 @@
-ROUXEL - UL HASSAN SHAH<br/>
-ESIEA UFA-3A
+[ESIEA UFA-3A]<br/>
+ROUXEL & UL HASSAN SHAH
 
 
 # Projet ImageIn
 
-Cette application permet d'afficher un galerie d'image en récuperant une liste d'urls dans un JSON hébergé sur un serveur.
+Cette application permet d'afficher une galerie d'image en récuperant une liste d'urls dans un JSON hébergé sur un serveur.
 Les images peuvent être ensuite partagées ou téléchargées.
 De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
 
@@ -24,7 +24,7 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
         - ImageActivity - Dialog pendant le téléchargement
 - [ ] Bouton dans l’action bar
 - [x] Service de téléchargement
-      ImageActivity - Bouton download
+    - ImageActivity - Bouton download
 - [ ] Notification de fin de téléchargement dans un BroadCastReceiver
 - [x] Traitement des données téléchargées (JSON)
     - Requête HTTP pour récupérer ou mettre à jour un JSON sur un serveur distant (api : http://myjson.com/)

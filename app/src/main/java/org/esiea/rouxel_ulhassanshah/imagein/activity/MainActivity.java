@@ -25,10 +25,10 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GalleryAdapter gAdapter;
-    private SwipeRefreshLayout swipeContainer;
     public static JSONAsyncTask updateTask;
     private final String url = "https://api.myjson.com/bins/diwxp";
+    private GalleryAdapter gAdapter;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

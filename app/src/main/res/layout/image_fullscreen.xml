@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:id="@+id/coordinator_layout">
+    android:background="@android:color/black">
 
     <WebView
         android:id="@+id/image_fullscreen_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 
     <ProgressBar
+        android:id="@+id/progress"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_x="109dp"
         android:layout_y="81dp"
-        android:id="@+id/progress"
-        android:visibility="visible"
         android:background="@android:color/black"
         android:indeterminate="true"
-        android:indeterminateTint="@color/colorAccent" />
+        android:indeterminateTint="@color/colorAccent"
+        android:visibility="visible" />
 
     <LinearLayout
+        android:id="@+id/fab_layout"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:id="@+id/fab_layout"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom|center">
-    </LinearLayout>
+        android:layout_gravity="bottom|center"
+        android:orientation="horizontal" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_share_white_24dp"
         android:tint="@color/colorIcons"
         app:backgroundTint="@color/colorAccent"
-        app:rippleColor="@color/colorAccentClicked"
+        app:fabSize="normal"
         app:layout_anchor="@id/fab_layout"
         app:layout_anchorGravity="start"
+        app:rippleColor="@color/colorAccentClicked"
+        app:srcCompat="@drawable/ic_share_white_24dp"
         app:useCompatPadding="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_file_download_white_24dp"
         android:tint="@color/colorIcons"
         app:backgroundTint="@color/colorAccent"
-        app:rippleColor="@color/colorAccentClicked"
+        app:fabSize="normal"
         app:layout_anchor="@id/fab_layout"
         app:layout_anchorGravity="end"
+        app:rippleColor="@color/colorAccentClicked"
+        app:srcCompat="@drawable/ic_file_download_white_24dp"
         app:useCompatPadding="true" />
 
 </android.support.design.widget.CoordinatorLayout>

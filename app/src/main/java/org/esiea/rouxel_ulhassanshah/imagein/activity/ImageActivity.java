@@ -2,6 +2,8 @@ package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,11 +14,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +40,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -121,6 +128,8 @@ public class ImageActivity extends AppCompatActivity {
                                 ActivityCompat.requestPermissions(ImageActivity.this,
                                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                         WRITE_PERM);
+                        } else {
+                            new ImageDownloadAsyncTask().execute();
                         }
                     } else {
                         new ImageDownloadAsyncTask().execute();
@@ -181,10 +190,8 @@ public class ImageActivity extends AppCompatActivity {
             case WRITE_PERM: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.i("OK", Integer.toString(requestCode));
                     new ImageDownloadAsyncTask().execute();
                 } else {
-                    Log.i("else", Integer.toString(requestCode));
                     Toast.makeText(ImageActivity.this, R.string.write_perm_denied_msg, Toast.LENGTH_SHORT).show();
                 }
 
@@ -217,20 +224,30 @@ public class ImageActivity extends AppCompatActivity {
                 options.inPreferredConfig = Bitmap.Config.RGB_565;
                 Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
 
-                String root = Environment.getExternalStorageDirectory().toString();
-                File dir = new File(root + "/Pictures/ImageIn");
+                String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+                File dir = new File(root + "/ImageIn");
 
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
 
-                String name = new Date().toString() + ".jpg";
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+                String date = format.format(new Date());
+                String name = date + ".jpg";
                 File file = new File(dir, name);
                 FileOutputStream out = new FileOutputStream(file);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
 
                 out.flush();
                 out.close();
+
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+                values.put(MediaStore.MediaColumns.DATA, file.getAbsolutePath());
+
+                ContentResolver cr = getContentResolver();
+                cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -242,6 +259,9 @@ public class ImageActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             dialog.dismiss();
+            Snackbar snackbar = Snackbar
+                    .make(findViewById(R.id.coordinator_layout), R.string.download_finished_snackbar, Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
     }
 }

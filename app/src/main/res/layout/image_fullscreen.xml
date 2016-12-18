@@ -26,30 +26,39 @@
         android:indeterminateTint="@color/colorAccent" />
 
     <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:id="@+id/fab_layout"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|center">
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end">
+        app:fabSize="normal"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_share_white_24dp"
+        android:tint="@color/colorIcons"
+        app:backgroundTint="@color/colorAccent"
+        app:rippleColor="@color/colorAccentClicked"
+        app:layout_anchor="@id/fab_layout"
+        app:layout_anchorGravity="start"
+        app:useCompatPadding="true" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_share_white_24dp"
-            android:tint="@color/colorIcons"
-            app:backgroundTint="@color/colorAccent"
-            app:rippleColor="@color/colorAccentClicked"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_file_download_white_24dp"
-            android:tint="@color/colorIcons"
-            app:backgroundTint="@color/colorAccent"
-            app:rippleColor="@color/colorAccentClicked"/>
-
-    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_file_download_white_24dp"
+        android:tint="@color/colorIcons"
+        app:backgroundTint="@color/colorAccent"
+        app:rippleColor="@color/colorAccentClicked"
+        app:layout_anchor="@id/fab_layout"
+        app:layout_anchorGravity="end"
+        app:useCompatPadding="true" />
 
 </android.support.design.widget.CoordinatorLayout>

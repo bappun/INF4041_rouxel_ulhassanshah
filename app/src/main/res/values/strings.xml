@@ -9,4 +9,5 @@
     <string name="image_download_dialog_title">Downloading...</string>
     <string name="image_download_dialog_text">Please wait</string>
     <string name="write_perm_denied_msg">Permission denied to write your storage</string>
+    <string name="download_finished_snackbar">Download finished</string>
 </resources>

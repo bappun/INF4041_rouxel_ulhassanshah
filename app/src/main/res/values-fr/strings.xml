@@ -10,4 +10,5 @@
     <string name="image_download_dialog_title">Téléchargement en cours...</string>
     <string name="image_download_dialog_text">Veuillez patienter</string>
     <string name="write_perm_denied_msg">Permission pour écrire sur le stockage refusée</string>
+    <string name="download_finished_snackbar">Téléchargement terminé</string>
 </resources>

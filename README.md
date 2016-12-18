@@ -32,3 +32,11 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
     - ImageActivity - Bouton share
 - [x] Affichage des données téléchargées dans une liste
     - MainActivity - RecyclerView
+
+
+## Bonus
+
+- [ ] Enregistrement en base de données (SQLite)
+- [ ] Sauvegarde de préférences utilisateur
+- [ ] Lecture d'un capteur (GPS, accéléromètre)
+- [ ] Onglets à base de fragments (difficile)

@@ -165,7 +165,8 @@ public class ImageActivity extends AppCompatActivity {
                             }
                             break;
                         case MotionEvent.ACTION_MOVE:
-                            if (Math.abs(motionEvent.getX() - mDownPosX) > MOVE_THRESHOLD_DP || Math.abs(motionEvent.getY() - mDownPosY) > MOVE_THRESHOLD_DP) {
+                            if (Math.abs(motionEvent.getX() - mDownPosX) > MOVE_THRESHOLD_DP ||
+                                    Math.abs(motionEvent.getY() - mDownPosY) > MOVE_THRESHOLD_DP) {
                                 mMoveOccurred = true;
                             }
                             break;
@@ -256,7 +257,7 @@ public class ImageActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean aBoolean) {
             dialog.dismiss();
             Snackbar snackbar = Snackbar
-                    .make(findViewById(R.id.coordinator_layout), R.string.download_finished_snackbar, Snackbar.LENGTH_LONG);
+                    .make(findViewById(R.id.coordinator_layout), R.string.download_completed_snackbar, Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }

@@ -1,11 +1,10 @@
-ROUXEL - UL HASSAN SHAH
-
-ESIEA UFA-3A
+[ESIEA UFA-3A]<br/>
+ROUXEL & UL HASSAN SHAH
 
 
 # Projet ImageIn
 
-Cette application permet d'afficher un galerie d'image en récuperant une liste d'urls dans un JSON hébergé sur un serveur.
+Cette application permet d'afficher une galerie d'image en récuperant une liste d'urls dans un JSON hébergé sur un serveur.
 Les images peuvent être ensuite partagées ou téléchargées.
 De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
 

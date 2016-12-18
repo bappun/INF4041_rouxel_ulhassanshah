@@ -21,10 +21,9 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
         - ImageActivity - Permission d'accès au storage refusée
     - [ ] Notification dans la barre de notifications
     - [x] Boîte de dialogue
-        - ImageActivity - Dialog pendant le téléchargement
+        - ImageActivity - Pendant le téléchargement d'une image
 - [ ] Bouton dans l’action bar
-- [x] Service de téléchargement
-    - ImageActivity - Bouton download
+- [ ] Service de téléchargement
 - [ ] Notification de fin de téléchargement dans un BroadCastReceiver
 - [x] Traitement des données téléchargées (JSON)
     - Requête HTTP pour récupérer ou mettre à jour un JSON sur un serveur distant (api : http://myjson.com/)

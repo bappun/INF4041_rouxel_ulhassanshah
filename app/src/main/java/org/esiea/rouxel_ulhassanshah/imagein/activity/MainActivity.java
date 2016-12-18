@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 swipeContainer.setRefreshing(false);
             }
         });
-        // Configure the refreshing colors
+
         swipeContainer.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
             if(aBoolean) {
                 gAdapter.clear();
                 gAdapter.addAll(updateTask.getJArray());
-                Toast.makeText(MainActivity.this, "Téléchargement du JSON terminé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.refresh_success, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(MainActivity.this, "Téléchargement du JSON échoué", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.refresh_error, Toast.LENGTH_SHORT).show();
             }
         }
 

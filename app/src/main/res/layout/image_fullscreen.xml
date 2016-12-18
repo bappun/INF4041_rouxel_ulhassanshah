@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@android:color/black"
+    android:id="@+id/coordinator_layout">
 
     <WebView
         android:id="@+id/image_fullscreen_webview"
@@ -11,4 +13,43 @@
         android:layout_height="match_parent"
         android:scrollbars="none"/>
 
-</LinearLayout>
+    <ProgressBar
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_x="109dp"
+        android:layout_y="81dp"
+        android:id="@+id/progress"
+        android:visibility="visible"
+        android:background="@android:color/black"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_share_white_24dp"
+            android:tint="@color/colorIcons"
+            app:backgroundTint="@color/colorAccent"
+            app:rippleColor="@color/colorAccentClicked"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_file_download_white_24dp"
+            android:tint="@color/colorIcons"
+            app:backgroundTint="@color/colorAccent"
+            app:rippleColor="@color/colorAccentClicked"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

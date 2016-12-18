@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ImageIn</string>
+    <string name="refresh_success">Téléchargement du JSON terminé</string>
+    <string name="refresh_error">Téléchargement du JSON échoué</string>
+    <string name="tv_splash">ImageIn</string>
+    <string name="share_subject">ImageIn</string>
+    <string name="share_chooser_title">Partager l\'image avec...</string>
+    <string name="share_text">Regarde cette image</string>
+    <string name="image_download_dialog_title">Téléchargement en cours...</string>
+    <string name="image_download_dialog_text">Veuillez patienter</string>
+</resources>

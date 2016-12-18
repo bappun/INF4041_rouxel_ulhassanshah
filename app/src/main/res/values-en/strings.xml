@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ImageIn</string>
-    <string name="tv_splash">ImageIn</string>
-    <string name="share_text">Check out this image</string>
     <string name="share_subject">ImageIn</string>
+    <string name="share_text">Check out this image</string>
+    <string name="tv_splash">ImageIn</string>
     <string name="share_chooser_title">Share image to...</string>
-    <string name="refresh_success">JSON download finished</string>
     <string name="refresh_error">JSON download failed</string>
+    <string name="refresh_success">JSON download finished</string>
     <string name="image_download_dialog_title">Downloading...</string>
     <string name="image_download_dialog_text">Please wait</string>
 </resources>

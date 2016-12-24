@@ -25,9 +25,9 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
     - [ ] Boîte de dialogue
 - [ ] Bouton dans l’action bar
 - [x] Service de téléchargement
-        - GetImageService
+    - GetImageService
 - [x] Notification de fin de téléchargement dans un BroadCastReceiver
-        - MainActivity - Reçoit la notification de fin de téléchargement du json dans un BroadcastReceiver
+    - MainActivity - Reçoit la notification de fin de téléchargement du json dans un BroadcastReceiver
 - [x] Traitement des données téléchargées (JSON)
     - Requête HTTP pour récupérer ou mettre à jour un JSON sur un serveur distant (api : http://myjson.com/)
 - [x] Appel vers une application externe

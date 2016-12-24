@@ -29,6 +29,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
         this.gallery = gallery;
     }
 
+    public GalleryAdapter() {
+
+    }
+
     @Override
     public ImageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater lif = LayoutInflater.from(parent.getContext());
@@ -41,7 +45,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
     public void onBindViewHolder(ImageHolder holder, int position) {
         try {
             String url = this.gallery.getJSONObject(position).getString("url");
-            holder.bind(url, position);
+            holder.bind(url);
         } catch(JSONException e) {
             e.printStackTrace();
         }
@@ -59,18 +63,22 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
         notifyDataSetChanged();
     }
 
-    public void addAll(JSONArray jArray) {
+    public void setData(JSONArray jArray) {
         gallery = jArray;
         notifyDataSetChanged();
     }
 
+    public JSONArray getJArray() {
+        return this.gallery;
+    }
 
-    public class ImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView iv;
-        public int position;
+    class ImageHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageHolder(View view) {
+        ImageView iv;
+        String url;
+
+        ImageHolder(View view) {
             super(view);
             this.iv = (ImageView) view.findViewById(R.id.gallery_thumbnail);
             iv.setOnClickListener(this);
@@ -82,14 +90,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
             Intent showImageIntent = new Intent(context, ImageActivity.class);
 
             Bundle extras = new Bundle();
-            extras.putInt("imagePosition", this.position);
+            extras.putString("imageURL", this.url);
 
             showImageIntent.putExtras(extras);
             context.startActivity(showImageIntent);
         }
 
-        public void bind(String url, int position) {
-            this.position = position;
+        void bind(String url) {
+            this.url = url;
             Glide.with(this.iv.getContext())
                     .load(url)
                     .placeholder(R.drawable.progress_animation)
@@ -98,6 +106,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ImageHol
                     .thumbnail(0.1f)
                     .centerCrop()
                     .into(this.iv);
+        }
+
+        public View getView() {
+            return this.iv;
         }
     }
 }

@@ -7,8 +7,9 @@
     <string name="share_subject">ImageIn</string>
     <string name="share_chooser_title">Partager l\'image avec...</string>
     <string name="share_text">Regarde cette image</string>
-    <string name="image_download_dialog_title">Téléchargement en cours...</string>
-    <string name="image_download_dialog_text">Veuillez patienter</string>
+    <string name="download_title">ImageIn</string>
+    <string name="download_text">Téléchargement en cours...</string>
     <string name="write_perm_denied_msg">Permission pour écrire sur le stockage refusée</string>
-    <string name="download_completed_snackbar">Téléchargement terminé</string>
+    <string name="download_completed">Téléchargement terminé</string>
+    <string name="download_failed">Téléchargement échoué</string>
 </resources>

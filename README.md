@@ -13,22 +13,26 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
 
 - [x] Langues EN et FR
 - [x] Éléments graphiques de base
-- [ ] Mode portrait/landscape pour une des activités
+- [x] Mode portrait/landscape pour une des activités
+    - MainActivity - Le nombre de colonnes change en fonction de l'orientation
 - [x] Au moins deux activités
 - [ ] Notifications
     - [x] Toast
         - MainActivity - Téléchargement du JSON
         - ImageActivity - Permission d'accès au storage refusée
-    - [ ] Notification dans la barre de notifications
-    - [x] Boîte de dialogue
-        - ImageActivity - Pendant le téléchargement d'une image
+    - [x] Notification dans la barre de notifications
+        - ImageActivity - Notification de progression du téléchargement de l'image
+    - [ ] Boîte de dialogue
 - [ ] Bouton dans l’action bar
-- [ ] Service de téléchargement
-- [ ] Notification de fin de téléchargement dans un BroadCastReceiver
+- [x] Service de téléchargement
+        - GetImageService
+- [x] Notification de fin de téléchargement dans un BroadCastReceiver
+        - MainActivity - Reçoit la notification de fin de téléchargement du json dans un BroadcastReceiver
 - [x] Traitement des données téléchargées (JSON)
     - Requête HTTP pour récupérer ou mettre à jour un JSON sur un serveur distant (api : http://myjson.com/)
 - [x] Appel vers une application externe
     - ImageActivity - Bouton share
+    - ImageActivity - CLic sur notification de fin de téléchargement de l'image envoie vers la galerie
 - [x] Affichage des données téléchargées dans une liste
     - MainActivity - RecyclerView
 

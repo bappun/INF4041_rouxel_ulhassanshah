@@ -7,8 +7,9 @@
     <string name="share_chooser_title">Share image to...</string>
     <string name="refresh_error">JSON download failed</string>
     <string name="refresh_success">JSON download finished</string>
-    <string name="image_download_dialog_title">Downloading...</string>
-    <string name="image_download_dialog_text">Please wait</string>
+    <string name="download_title">ImageIn</string>
+    <string name="download_text">Downloading...</string>
     <string name="write_perm_denied_msg">Permission denied to write your storage</string>
-    <string name="download_completed_snackbar">Download completed</string>
+    <string name="download_completed">Download completed</string>
+    <string name="download_failed">Download failed</string>
 </resources>

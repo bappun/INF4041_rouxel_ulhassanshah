@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -24,7 +25,7 @@
         </activity>
         <activity
             android:name=".activity.ImageActivity"
-            android:theme="@style/ImageActivity"></activity>
+            android:theme="@style/ImageActivity" />
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -33,6 +34,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <service
+            android:name=".service.GetImagesService"
+            android:exported="false" />
     </application>
 
 </manifest>

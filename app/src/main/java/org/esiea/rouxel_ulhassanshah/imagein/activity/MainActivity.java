@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private StaggeredGridLayoutManager lm;
     private GalleryAdapter gAdapter;
+    private RecyclerView rv ;
     private SwipeRefreshLayout swipeContainer;
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
+        rv = (RecyclerView) findViewById(R.id.recycler_view);
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             lm = new StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL);
         }
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             lm.setSpanCount(2);
         }
         else {
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, intent.getAction());
             gAdapter.setData(getImagesFromFile());
-            if (true)
+            if (intent.getAction().equals(IMAGES_UPDATE))
                 Toast.makeText(MainActivity.this, R.string.refresh_success, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(MainActivity.this, R.string.refresh_error, Toast.LENGTH_SHORT).show();

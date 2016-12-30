@@ -67,7 +67,7 @@ public class GetImagesService extends IntentService {
             conn.connect();
             if(HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
                 copyInputStreamToFile(conn.getInputStream(), new File(getCacheDir(), "images.json"));
-                Log.d(TAG, "Images json downloaded !");
+                Log.d(TAG, "Images json downloaded!");
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(MainActivity.IMAGES_UPDATE));
             }
         } catch (IOException e) {

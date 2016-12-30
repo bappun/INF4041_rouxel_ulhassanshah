@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="pref_row_count"
+        android:title="@string/pref_row_count"
+        android:summary="@string/pref_row_sum"
+        android:entries="@array/listentries"
+        android:entryValues="@array/listvalues"
+        android:defaultValue="2" />
+
+    <ListPreference
+        android:key="pref_row_count_land"
+        android:title="@string/pref_row_count_land"
+        android:summary="@string/pref_row_sum_land"
+        android:entries="@array/listentries"
+        android:entryValues="@array/listvalues"
+        android:defaultValue="4" />
+
+</PreferenceScreen>

@@ -12,4 +12,10 @@
     <string name="write_perm_denied_msg">Permission pour écrire sur le stockage refusée</string>
     <string name="download_completed">Téléchargement terminé</string>
     <string name="download_failed">Téléchargement échoué</string>
+    <string name="action_settings">Options</string>
+    <string name="action_menu">Menu</string>
+    <string name="pref_row_count">Nombre de rangées</string>
+    <string name="pref_row_sum">Changer le nombre de rangées de la grille</string>
+    <string name="pref_row_count_land">Nombre de rangées (paysage)</string>
+    <string name="pref_row_sum_land">Changer le nombre de rangées de la grille (paysage)</string>
 </resources>

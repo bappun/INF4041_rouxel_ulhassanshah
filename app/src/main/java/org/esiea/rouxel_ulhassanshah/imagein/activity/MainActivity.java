@@ -1,18 +1,24 @@
 package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.esiea.rouxel_ulhassanshah.imagein.R;
@@ -40,16 +46,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rv = (RecyclerView) findViewById(R.id.recycler_view);
-        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            lm = new StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL);
-        }
-        else {
-            lm = new StaggeredGridLayoutManager(4, GridLayoutManager.VERTICAL);
-        }
-        rv.setLayoutManager(lm);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.activity_main);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -57,8 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 swipeContainer.setRefreshing(false);
             }
         });
-
         swipeContainer.setColorSchemeResources(R.color.colorAccent);
+
+        rv = (RecyclerView) findViewById(R.id.recycler_view);
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int storedPreference = Integer.parseInt(preferences.getString("pref_row_count", "2"));
+            lm = new StaggeredGridLayoutManager(storedPreference, GridLayoutManager.VERTICAL);
+        }
+        else {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int storedPreference = Integer.parseInt(preferences.getString("pref_row_count_land", "4"));
+            lm = new StaggeredGridLayoutManager(storedPreference, GridLayoutManager.VERTICAL);
+        }
+        rv.setLayoutManager(lm);
 
         gAdapter = new GalleryAdapter();
         rv.setAdapter(gAdapter);
@@ -66,6 +78,30 @@ public class MainActivity extends AppCompatActivity {
         GetImagesService.startActionGetAllImages(this);
         IntentFilter intentFilter = new IntentFilter(IMAGES_UPDATE);
         LocalBroadcastManager.getInstance(this).registerReceiver(new ImagesUpdate(), intentFilter);
+
+        IntentFilter intentFilterPref = new IntentFilter(PREF_UPDATE);
+        LocalBroadcastManager.getInstance(this).registerReceiver(new PrefUpdate(), intentFilterPref);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Context context = MainActivity.this;
+                Intent openSettings = new Intent(context, SettingsActivity.class);
+                context.startActivity(openSettings);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override
@@ -73,10 +109,14 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            lm.setSpanCount(2);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int storedPreference = Integer.parseInt(preferences.getString("pref_row_count", "2"));
+            lm.setSpanCount(storedPreference);
         }
         else {
-            lm.setSpanCount(4);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            int storedPreference = Integer.parseInt(preferences.getString("pref_row_count_land", "2"));
+            lm.setSpanCount(storedPreference);
         }
     }
 
@@ -94,6 +134,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.refresh_success, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(MainActivity.this, R.string.refresh_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static final String PREF_UPDATE = "PREF_UPDATE";
+    public class PrefUpdate extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, intent.getAction());
+            onConfigurationChanged(getResources().getConfiguration());
         }
     }
 

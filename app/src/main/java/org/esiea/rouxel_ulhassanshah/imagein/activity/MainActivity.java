@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter(IMAGES_UPDATE);
         LocalBroadcastManager.getInstance(this).registerReceiver(new ImagesUpdate(), intentFilter);
 
-        IntentFilter intentFilterPref = new IntentFilter(PREF_UPDATE);
+        IntentFilter intentFilterPref = new IntentFilter(PREFS_UPDATE);
         LocalBroadcastManager.getInstance(this).registerReceiver(new PrefUpdate(), intentFilterPref);
     }
 

@@ -27,7 +27,7 @@ public class ImageService extends IntentService {
     private static final String ACTION_GET_ALL_IMAGES = "org.esiea.rouxel_ulhassanshah.imagein.service.action.GET_ALL_IMAGES";
     private static final String ACTION_UP_IMAGE = "org.esiea.rouxel_ulhassanshah.imagein.service.action.UP_IMAGE";
 
-    private static final String JSON_URL = "https://api.myjson.com/bins/diwxp";
+    private static final String JSON_URL = "https://api.myjson.com/bins/6c0hv";
 
     public ImageService() {
         super("ImageService");

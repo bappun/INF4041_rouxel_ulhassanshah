@@ -6,7 +6,9 @@ ROUXEL & UL HASSAN SHAH
 
 Cette application permet d'afficher une galerie d'image en récuperant une liste d'urls dans un JSON hébergé sur un serveur.
 Les images peuvent être ensuite partagées ou téléchargées.
-De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
+De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.<br/><br/>
+
+Lien du JSON : http://myjson.com/diwxp
 
 
 ## Attendus techniques
@@ -76,5 +78,6 @@ Comportement en dessous de KitKat inconnu.
 
 L'upload d'images n'a pas été sécurisé par soucis de priorités des tâches pour le projet. Toute chaine de caractères peut y être placée.
 Des comportements inattendus peuvent donc survenir si la fonction n'est pas utilisée correctement (ajout de l'url d'une image).
-Si un lien est incorrect ou qu'il n'y a pas de connexion, le logo de l'application doit s'afficher.<br/>
+Si un lien est incorrect ou qu'il n'y a pas de connexion, le logo de l'application doit s'afficher.<br/><br/>
+
 De plus, l'UploadActivity regroupe quelques fonctionnalités incohérentes afin de satisfaire certains bonus. Veuillez nous pardonner m(_ _)m.

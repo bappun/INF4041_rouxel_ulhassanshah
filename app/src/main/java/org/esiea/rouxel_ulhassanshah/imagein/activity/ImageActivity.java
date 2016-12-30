@@ -103,19 +103,10 @@ public class ImageActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Uri> imageUris = new ArrayList<>();
-
-                Uri.Builder b = Uri.parse(imageURL).buildUpon();
-                imageUris.add(b.build());
-
-                Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                shareIntent.setType("image/*");
-
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject));
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
-
-                shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
-
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + "\n\n" + imageURL);
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)));
             }
         });

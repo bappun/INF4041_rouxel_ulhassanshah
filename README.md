@@ -28,7 +28,7 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
     - MainActivity - Bouton pour les options
     - SettingsActivity - Bouton retour précédente activité
 - [x] Service de téléchargement
-    - GetImageService
+    - ImageService
 - [x] Notification de fin de téléchargement dans un BroadCastReceiver
     - MainActivity - Reçoit la notification de fin de téléchargement du json dans un BroadcastReceiver
 - [x] Traitement des données téléchargées (JSON)
@@ -42,8 +42,39 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
 
 ## Bonus
 
-- [ ] Enregistrement en base de données (SQLite)
+- [x] Enregistrement en base de données (SQLite)
+    - UploadActivity - ExtrasFragment - Secouez pour sauvegarder la date courant dans la base
 - [x] Sauvegarde de préférences utilisateur
-    - SettingsActivity - Sauvegarde de la préférence du nombre de rangées portrait/landscape
-- [ ] Lecture d'un capteur (GPS, accéléromètre)
-- [ ] Onglets à base de fragments (difficile)
+    - SettingsActivity - Sauvegarde de la préférence du nombre de rangées en portrait/landscape dans le MainActivity
+- [x] Lecture d'un capteur (GPS, accéléromètre)
+    - UploadActivity - ExtrasFragment - Secouez pour sauvegarder la date courant dans la base
+- [x] Onglets à base de fragments (difficile)
+    - UploadActivity - UploadFragment & ExtrasFragment
+
+
+## Autres fonctionnalités implémentées (pas dans le sujet)
+- MainActivity - SwipeContainer (pull to refresh)
+- MainActivity - BroadcastReceiver pour la modifications des préférences
+- MainActivity - BroadcastReceiver pour l'upload d'images
+- SettingsActivity - Flèche retour arrière dans la toolbar
+- Splash screen au lancement de l'application
+- ImageActivity - Clic rapide sur le fond cache les FloatingActionButtons
+- ImageActivity - Image mise dans une WebView, permettant aussi de zoomer
+- UploadActivity - Modification du JSON (api : http://myjson.com/)
+
+
+## Tests
+
+- Smartphone sous Marshmallow (API 23)
+- Ėmulateur sous KitKat (API 19)
+
+Aucun problème fonctionnel observé. L'interface peut varier légèrement en dessous de Lollipop.
+Comportement en dessous de KitKat inconnu.
+
+
+## Remarques
+
+L'upload d'images n'a pas été sécurisé par soucis de priorités des tâches pour le projet. Toute chaine de caractères peut y être placée.
+Des comportements inattendus peuvent donc survenir si la fonction n'est pas utilisée correctement (ajout de l'url d'une image).
+Si un lien est incorrect ou qu'il n'y a pas de connexion, le logo de l'application doit s'afficher.<br/>
+De plus, l'UploadActivity regroupe quelques fonctionnalités incohérentes afin de satisfaire certains bonus. Veuillez nous pardonner m(_ _)m.

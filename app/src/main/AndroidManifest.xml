@@ -38,10 +38,15 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name=".service.GetImagesService"
+            android:name=".service.ImageService"
             android:exported="false" />
 
-        <activity android:name=".activity.SettingsActivity"
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.UploadActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

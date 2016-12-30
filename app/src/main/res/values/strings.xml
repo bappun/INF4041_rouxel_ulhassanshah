@@ -12,9 +12,15 @@
     <string name="download_completed">Download completed</string>
     <string name="download_failed">Download failed</string>
     <string name="action_settings">Settings</string>
+    <string name="action_upload">Upload</string>
     <string name="action_menu">Menu</string>
     <string name="pref_row_count">Number of rows</string>
     <string name="pref_row_count_land">Number of rows</string>
     <string name="pref_row_sum">Change the number of rows of the grid</string>
     <string name="pref_row_sum_land">Change the number of rows of the grid</string>
+    <string name="image_uploaded">Image uploaded</string>
+    <string name="image_upload_failed">Upload failed</string>
+    <string name="extras">Extras</string>
+    <string name="url">URL</string>
+    <string name="shake_to_save">Shake the device to save the date into SQLite!</string>
 </resources>

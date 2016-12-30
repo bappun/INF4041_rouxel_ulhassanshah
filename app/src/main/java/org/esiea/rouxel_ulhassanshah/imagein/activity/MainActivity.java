@@ -1,6 +1,5 @@
 package org.esiea.rouxel_ulhassanshah.imagein.activity;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,10 +22,9 @@ import android.widget.Toast;
 
 import org.esiea.rouxel_ulhassanshah.imagein.R;
 import org.esiea.rouxel_ulhassanshah.imagein.adapter.GalleryAdapter;
-import org.esiea.rouxel_ulhassanshah.imagein.service.GetImagesService;
+import org.esiea.rouxel_ulhassanshah.imagein.service.ImageService;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                GetImagesService.startActionGetAllImages(MainActivity.this);
+                ImageService.startActionGetAllImages(MainActivity.this);
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -75,9 +73,21 @@ public class MainActivity extends AppCompatActivity {
         gAdapter = new GalleryAdapter();
         rv.setAdapter(gAdapter);
 
-        GetImagesService.startActionGetAllImages(this);
-        IntentFilter intentFilter = new IntentFilter(IMAGES_UPDATE);
-        LocalBroadcastManager.getInstance(this).registerReceiver(new ImagesUpdate(), intentFilter);
+
+        ImageService.startActionGetAllImages(this);
+        ImagesUpdate iu = new ImagesUpdate();
+
+        IntentFilter intentFilterDownImage = new IntentFilter(IMAGES_DOWNLOADED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(iu, intentFilterDownImage);
+
+        IntentFilter intentFilterDownImageFailed = new IntentFilter(IMAGES_DOWNLOAD_FAILED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(iu, intentFilterDownImageFailed);
+
+        IntentFilter intentFilterUpImage = new IntentFilter(IMAGE_UPLOADED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(iu, intentFilterUpImage);
+
+        IntentFilter intentFilterUpImageFailed = new IntentFilter(IMAGE_UPLOAD_FAILED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(iu, intentFilterUpImageFailed);
 
         IntentFilter intentFilterPref = new IntentFilter(PREFS_UPDATE);
         LocalBroadcastManager.getInstance(this).registerReceiver(new PrefUpdate(), intentFilterPref);
@@ -91,9 +101,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Context context;
+
         switch (item.getItemId()) {
+            case R.id.action_upload:
+                context = MainActivity.this;
+                Intent openAct = new Intent(context, UploadActivity.class);
+                context.startActivity(openAct);
+                return true;
+
             case R.id.action_settings:
-                Context context = MainActivity.this;
+                context = MainActivity.this;
                 Intent openSettings = new Intent(context, SettingsActivity.class);
                 context.startActivity(openSettings);
                 return true;
@@ -124,16 +142,26 @@ public class MainActivity extends AppCompatActivity {
         return this.gAdapter.getJArray();
     }
 
-    public static final String IMAGES_UPDATE = "IMAGES_UPDATE";
+    public static final String IMAGES_DOWNLOADED = "IMAGES_DOWNLOADED";
+    public static final String IMAGES_DOWNLOAD_FAILED = "IMAGES_DOWNLOAD_FAILED";
+    public static final String IMAGE_UPLOADED = "IMAGE_UPLOADED";
+    public static final String IMAGE_UPLOAD_FAILED = "IMAGE_UPLOAD_FAILED";
     public class ImagesUpdate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, intent.getAction());
-            gAdapter.setData(getImagesFromFile());
-            if (intent.getAction().equals(IMAGES_UPDATE))
+
+            if (intent.getAction().equals(IMAGES_DOWNLOADED)) {
+                gAdapter.setData(getImagesFromFile());
                 Toast.makeText(MainActivity.this, R.string.refresh_success, Toast.LENGTH_SHORT).show();
-            else
+            } else if (intent.getAction().equals(IMAGES_DOWNLOAD_FAILED)) {
                 Toast.makeText(MainActivity.this, R.string.refresh_error, Toast.LENGTH_SHORT).show();
+            } else if (intent.getAction().equals(IMAGE_UPLOADED)) {
+                Toast.makeText(MainActivity.this, R.string.image_uploaded, Toast.LENGTH_SHORT).show();
+                ImageService.startActionGetAllImages(MainActivity.this);
+            } else if (intent.getAction().equals(IMAGE_UPLOAD_FAILED)) {
+                Toast.makeText(MainActivity.this, R.string.image_upload_failed, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -152,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             byte[] buf = new byte[is.available()];
             is.read(buf);
             is.close();
-            return new JSONObject(new String(buf, "UTF-8")).getJSONArray("images");
+            return new JSONArray(new String(buf, "UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
             return new JSONArray();

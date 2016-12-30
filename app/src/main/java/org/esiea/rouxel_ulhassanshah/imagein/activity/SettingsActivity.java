@@ -36,6 +36,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(MainActivity.PREF_UPDATE));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(MainActivity.PREFS_UPDATE));
     }
 }

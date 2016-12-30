@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static final String PREF_UPDATE = "PREF_UPDATE";
+    public static final String PREFS_UPDATE = "PREFS_UPDATE";
     public class PrefUpdate extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -35,7 +35,7 @@ De nouvelles images pourront aussi être ajoutées au JSON par l'utilisateur.
     - Requête HTTP pour récupérer ou mettre à jour un JSON sur un serveur distant (api : http://myjson.com/)
 - [x] Appel vers une application externe
     - ImageActivity - Bouton share
-    - ImageActivity - CLic sur notification de fin de téléchargement de l'image envoie vers la galerie
+    - ImageActivity - Clic sur notification de fin de téléchargement de l'image envoie vers la galerie
 - [x] Affichage des données téléchargées dans une liste
     - MainActivity - RecyclerView
 
